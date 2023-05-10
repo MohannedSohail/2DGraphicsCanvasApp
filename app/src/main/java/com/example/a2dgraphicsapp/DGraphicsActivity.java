@@ -19,20 +19,21 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
 
-public class DGraphicsActivity extends AppCompatActivity implements ColorPickerDialog.OnColorChangedListener{
+public class DGraphicsActivity extends AppCompatActivity implements ColorPickerDialog.OnColorChangedListener {
     private DrawingSurfaceView mDrawingSurfaceView;
     private Button mColorButton;
     private CardView cardView;
     private Button mWidthButton;
     private Button mClearButton;
     private Button mSaveButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dgraphics);
         SeekBar lineWidthSeekBar = findViewById(R.id.line_width_seekbar);
 
-        mDrawingSurfaceView=findViewById(R.id.drawing_surface_view);
+        mDrawingSurfaceView = findViewById(R.id.drawing_surface_view);
 //        mColorButton = findViewById(R.id.color_button);
         mWidthButton = findViewById(R.id.width_button);
         mClearButton = findViewById(R.id.clear_button);
@@ -40,24 +41,6 @@ public class DGraphicsActivity extends AppCompatActivity implements ColorPickerD
         cardView = findViewById(R.id.card);
 
         Paint mPaint = new Paint();
-
-
-        // Set up button click listeners
-//        mColorButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new ColorPickerDialog(DGraphicsActivity.this, DGraphicsActivity.this, mPaint.getColor()).show();
-//
-//
-//                // Show color picker dialog and set color on drawing view
-////                new ColorPickerDialog(DGraphicsActivity.this, new ColorPickerDialog.OnColorSelectedListener() {
-////                    @Override
-////                    public void onColorSelected(int color) {
-////                        mDrawingSurfaceView.setColor(color);
-////                    }
-////                }).show();
-//            }
-//        });
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,14 +53,6 @@ public class DGraphicsActivity extends AppCompatActivity implements ColorPickerD
         mWidthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Show width picker dialog and set width on drawing view
-//                new WidthPickerDialog(DGraphicsActivity.this, new WidthPickerDialog.OnWidthSelectedListener() {
-//                    @Override
-//                    public void onWidthSelected(int width) {
-//                        mDrawingSurfaceView.setWidth(width);
-//                    }
-//                }).show();
-
                 if (lineWidthSeekBar.getVisibility() == View.VISIBLE) {
                     lineWidthSeekBar.setVisibility(View.GONE);
                 } else {
@@ -91,8 +66,8 @@ public class DGraphicsActivity extends AppCompatActivity implements ColorPickerD
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 // Update the line width when the seekbar is changed
-                int lineWidth =  progress;
-               mDrawingSurfaceView.setWidth(lineWidth);
+                int lineWidth = progress;
+                mDrawingSurfaceView.setWidth(lineWidth);
             }
 
             @Override
@@ -117,7 +92,6 @@ public class DGraphicsActivity extends AppCompatActivity implements ColorPickerD
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Save bitmap to external storage
                 Bitmap bitmap = mDrawingSurfaceView.getBitmap();
                 try {
                     File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "signature.png");
